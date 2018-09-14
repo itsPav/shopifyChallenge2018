@@ -1,0 +1,28 @@
+h1 {
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.header {
+ text-align: center;
+ background-color: #9a279a; 
+ color: white;
+ height: 200px;
+ position: relative;
+}
+
+.mainArea {
+  height: 100%;
+}
+
+.searchArea {
+  height: 100%;
+}
+
+.favArea {
+  background-color: #9a279a6e;
+  height: 100%;
+}
