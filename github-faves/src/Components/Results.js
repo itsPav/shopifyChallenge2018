@@ -1,4 +1,5 @@
 import React from 'react';
+import Repo from './Repo';
 
 const PhotoContainer = props => {
     const results = props.repos;
@@ -15,9 +16,19 @@ const PhotoContainer = props => {
 
     return(
         <div className="repo-container">
-            <ul className="repo-list">
-                {repos}
-            </ul>
+            <table className="repo-list">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Language</th>
+                        <th>Latest Tag</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {repos}
+                </tbody>
+            </table>
         </div>
     );
 };

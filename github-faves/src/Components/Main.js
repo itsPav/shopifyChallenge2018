@@ -33,30 +33,33 @@ export default class Main extends Component {
         axios({
           url: `https://api.github.com/graphql`,
           method: 'post',
+          headers: { "Authorization": "bearer " + apiKey},
           data: {
-            query: `
-              repository(owner:"octocat", name:"Hello-World") {
-                issues(last:20, states:CLOSED) {
-                  edges {
-                    node {
-                      title
+            query: `{
+              search(query: "shopify", type: REPOSITORY, first: 10) {
+                repositoryCount
+                edges {
+                  node {
+                    ... on Repository {
+                      nameWithOwner
                       url
-                      labels(first:10) {
-                        edges {
-                          node {
-                            name
-                          }
+                      primaryLanguage {
+                        name
+                      }    
+                      releases(last: 1) {
+                        nodes {
+                          name
                         }
-                      }
+                      }  
                     }
                   }
                 }
               }
-            }
-            `
+            }`
           }
+
         }).then(response => {
-          console.log(response);
+          console.log(response.data.data.search.edges);
           this.setState({
             repos: response.data,
             isLoading: false

@@ -22,6 +22,17 @@ h1 {
   height: 100%;
 }
 
+.searchForm {
+  margin: 25px auto 0 auto;
+  width: 80%;
+}
+
+.searchButton {
+  background-color: #9a279a;
+  color: white;
+  margin-left: 10px;
+}
+
 .favArea {
   background-color: #9a279a6e;
   height: 100%;
