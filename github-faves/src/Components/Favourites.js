@@ -2,7 +2,13 @@ import React from 'react';
 import Repo from './Repo';
 
 const Favourites = props => {
-    const results = props.repos;
+    const results = props.favourites;
+    let faves = [];
+    faves = results.filter(repo => faves.indexOf(repo) !== -1 );
+
+    let rows = faves.map(repo => 
+        <Repo key={repo.node.url} data={repo}/>
+    )
 
     return(
         <div className="repo-container">
@@ -16,7 +22,7 @@ const Favourites = props => {
                     </tr>
                 </thead>
                 <tbody>
-                    
+                    {rows}
                 </tbody>
             </table>
         </div>

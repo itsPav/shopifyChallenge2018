@@ -94,7 +94,7 @@ export default class Main extends Component {
                     <Results repos={this.state.repos} addFavourites={this.addFavourites} />
                 </div>
                 <div className="col-md favArea">
-                    <Favourites />
+                    <Favourites favourites={this.state.favourites}/>
                 </div>
             </div>
           </div>
