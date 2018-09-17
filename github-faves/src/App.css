@@ -8,7 +8,7 @@ h1 {
 
 .header {
  text-align: center;
- background-color: #9a279a; 
+ background-color: #7D22F9; 
  color: white;
  height: 200px;
  position: relative;
@@ -20,20 +20,42 @@ h1 {
 
 .searchArea {
   height: 100%;
+  padding-top: 25px;
+}
+
+.favArea {
+  padding-top: 25px;
 }
 
 .searchForm {
-  margin: 25px auto 0 auto;
+  margin: 0 auto 0 auto;
   width: 80%;
 }
 
+input {
+  width: 60%;
+}
+
 .searchButton {
-  background-color: #9a279a;
+  background-color: #7D22F9;
   color: white;
   margin-left: 10px;
 }
 
 .favArea {
-  background-color: #9a279a6e;
-  height: 100%;
+  background-color: #F4EBFF;
+}
+
+table {
+  margin: 0 20px 0 20px;
+}
+
+.tbLong {
+  width: 200px;
+  padding-bottom: 10px;
+}
+
+.add {
+  color:#7D22F9;
+  text-decoration: underline;
 }

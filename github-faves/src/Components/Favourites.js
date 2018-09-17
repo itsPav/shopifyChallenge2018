@@ -1,12 +1,8 @@
 import React from 'react';
 import Repo from './Repo';
 
-const Results = props => {
+const Favourites = props => {
     const results = props.repos;
-
-    let rows = results.map(repo => 
-        <Repo key={repo.node.url} data={repo} addFavourites={props.addFavourites}/>
-    )
 
     return(
         <div className="repo-container">
@@ -20,11 +16,11 @@ const Results = props => {
                     </tr>
                 </thead>
                 <tbody>
-                    {rows}
+                    
                 </tbody>
             </table>
         </div>
     );
 };
 
-export default Results;
+export default Favourites;

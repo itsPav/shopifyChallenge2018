@@ -5,28 +5,26 @@ import apiKey from '../config';
 import Header from './Header';
 import SearchForm from './SearchForm';
 import Results from './Results';
-import Favorites from './Favorites';
+import Favourites from './Favourites';
 
 export default class Main extends Component {
 
     constructor(props) {
         super(props);
-    
+        this.addFavourites = this.addFavourites.bind(this);
+
         this.state = {
-          query: '',
           repos: [],
+          favourites: [],
           isLoading: false
         }
       }
 
       componentWillMount () {
         this.setState({
-          query: this.props.query
+          repos: [],
+          favourites: []
         })
-      }
-
-      componentDidMount() {
-        this.performSearch(this.state.query);
       }
 
       performSearch = (query) => {
@@ -36,7 +34,7 @@ export default class Main extends Component {
           headers: { "Authorization": "bearer " + apiKey},
           data: {
             query: `{
-              search(query: "shopify", type: REPOSITORY, first: 10) {
+              search(query: "${query}", type: REPOSITORY, first: 10) {
                 repositoryCount
                 edges {
                   node {
@@ -59,9 +57,11 @@ export default class Main extends Component {
           }
 
         }).then(response => {
-          console.log(response.data.data.search.edges);
+          if(query.length > 0) {
+            console.log(response.data.data.search.edges);
+          }
           this.setState({
-            repos: response.data,
+            repos: response.data.data.search.edges,
             isLoading: false
           })
         })
@@ -70,23 +70,31 @@ export default class Main extends Component {
         });
       }
 
+      addFavourites(data) {
+        var newStateArray = this.state.favourites;
+        newStateArray.push(data);
+        this.setState({
+          favourites: newStateArray
+        })
+      }
+
       render() {
         return (
           <div>
             <Header />
             <div className="row mainArea">
                 <div className="col-md searchArea">
-                    <SearchForm />
+                    <SearchForm performSearch={this.performSearch}/>
                     {/* { (this.state.isLoading) 
                         ? <h1>Searching...</h1> 
                         : <PhotoContainer 
                         imgs = {this.state.imgs} 
                         query={this.state.query} />
                     } */}
-                    <Results />
+                    <Results repos={this.state.repos} addFavourites={this.addFavourites} />
                 </div>
                 <div className="col-md favArea">
-                    <Favorites />
+                    <Favourites />
                 </div>
             </div>
           </div>
