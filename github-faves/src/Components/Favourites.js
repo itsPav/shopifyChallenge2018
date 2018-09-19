@@ -2,12 +2,12 @@ import React from 'react';
 import Repo from './Repo';
 
 const Favourites = props => {
-    const results = props.favourites;
-    let faves = [];
-    faves = results.filter(repo => faves.indexOf(repo) !== -1 );
+    const faves = props.favourites;
+    const favourite = true;
+    const added = true;
 
     let rows = faves.map(repo => 
-        <Repo key={repo.node.url} data={repo}/>
+        <Repo key={repo.node.url} data={repo} favourite={favourite} added={added}/>
     )
 
     return(

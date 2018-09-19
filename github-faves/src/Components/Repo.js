@@ -9,8 +9,8 @@ export default class Repo extends Component {
           nameWithOwner: '',
           primaryLanguage: '',
           tagName: '',
-          add: '',
-          added: false
+          added: false,
+          favourite: false
         }
     }
 
@@ -19,24 +19,26 @@ export default class Repo extends Component {
             nameWithOwner: this.props.data.node.nameWithOwner,
             primaryLanguage: this.props.data.node.primaryLanguage ? this.props.data.node.primaryLanguage.name : "",
             tagName: this.props.data.node.releases.nodes.length > 0 ? this.props.data.node.releases.nodes[0].name : "-",
-            add: 'Add',
-            added: false
+            added: this.props.added ? '' : 'Add',
+            favourite: this.props.favourite ? 'Remove' : ''   
         })
-      }
+    }
 
     addToFavorites = () => {
-        this.setState({
-            added: true,
-            add: ''
-        })
-        // send data to favorites and create a repo there
-        this.props.addFavourites(this.props.data);
+        if(!this.props.added && !this.props.favourite) {
+            this.setState({
+                added: true,
+                favourite: true
+            })
+            // send data to favorites and create a repo there
+            this.props.addFavourites(this.props.data);
+        }
     }
 
     removeFromFavourites = () => {
         this.setState({
             added: false,
-            add: 'Add'
+            favorite: false
         })
     }
 
@@ -50,7 +52,7 @@ export default class Repo extends Component {
                 <td>
                     { this.state.tagName }
                 </td>
-                <td className="add" onClick={this.addToFavorites}> {this.state.add} </td>
+                <td className="add" onClick={this.addToFavorites}> {this.state.added} {this.state.favourite} </td>
             </tr>
         );
     }

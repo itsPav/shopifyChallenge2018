@@ -16,6 +16,7 @@ export default class Main extends Component {
         this.state = {
           repos: [],
           favourites: [],
+          favTracker: [],
           isLoading: false
         }
       }
@@ -23,7 +24,8 @@ export default class Main extends Component {
       componentWillMount () {
         this.setState({
           repos: [],
-          favourites: []
+          favourites: [],
+          favTracker: []
         })
       }
 
@@ -72,9 +74,16 @@ export default class Main extends Component {
 
       addFavourites(data) {
         var newStateArray = this.state.favourites;
-        newStateArray.push(data);
+        var favTracker = this.state.favTracker;
+
+        if(favTracker.indexOf(data.node.url) === -1) {
+          newStateArray.push(data);
+          favTracker.push(data.node.url);
+        }
+
         this.setState({
-          favourites: newStateArray
+          favourites: newStateArray,
+          favTracker: favTracker
         })
       }
 
@@ -85,13 +94,12 @@ export default class Main extends Component {
             <div className="row mainArea">
                 <div className="col-md searchArea">
                     <SearchForm performSearch={this.performSearch}/>
-                    {/* { (this.state.isLoading) 
+                    { (this.state.isLoading) 
                         ? <h1>Searching...</h1> 
-                        : <PhotoContainer 
-                        imgs = {this.state.imgs} 
-                        query={this.state.query} />
-                    } */}
-                    <Results repos={this.state.repos} addFavourites={this.addFavourites} />
+                        : <Results repos={this.state.repos} 
+                        addFavourites={this.addFavourites} 
+                        favTracker={this.state.favTracker}/>
+                    }
                 </div>
                 <div className="col-md favArea">
                     <Favourites favourites={this.state.favourites}/>

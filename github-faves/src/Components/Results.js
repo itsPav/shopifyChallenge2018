@@ -3,9 +3,18 @@ import Repo from './Repo';
 
 const Results = props => {
     const results = props.repos;
+    var added = false;
+    const favTracker = props.favTracker;
 
-    let rows = results.map(repo => 
-        <Repo key={repo.node.url} data={repo} addFavourites={props.addFavourites}/>
+    let rows = results.map((repo) => 
+        { 
+            if(favTracker.indexOf(repo.node.url) !== -1) {
+                added = true;
+            } else {
+                added = false;
+            }
+            return <Repo key={repo.node.url} data={repo} addFavourites={props.addFavourites} added={added}/>
+        }
     )
 
     return(
