@@ -4,8 +4,10 @@ Build a web app to search Github repositories, favourite repos, manage favourite
 
 ## Setup
 - Create a new file config.js in the src folder
-	- const apiKey = 'api_key_goes_Here';
-	- export default apiKey;
+	```
+	const apiKey = 'api_key_goes_Here';
+	export default apiKey;
+	```
 	- npm install
 	- npm start
 
