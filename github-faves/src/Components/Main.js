@@ -12,6 +12,7 @@ export default class Main extends Component {
     constructor(props) {
         super(props);
         this.addFavourites = this.addFavourites.bind(this);
+        this.removeFavourites = this.removeFavourites.bind(this);
 
         this.state = {
           repos: [],
@@ -87,6 +88,25 @@ export default class Main extends Component {
         })
       }
 
+      removeFavourites(data) {
+        var newStateArray = this.state.favourites;
+        var favTracker = this.state.favTracker;
+
+        // console.log(newStateArray);
+        // console.log(favTracker);
+
+        var index = favTracker.indexOf(data.node.url);
+        if (index > -1) {
+          favTracker.splice(index, 1);
+          newStateArray.splice(index,1);
+        }
+
+        this.setState({
+          favourites: newStateArray,
+          favTracker: favTracker
+        })
+      }
+
       render() {
         return (
           <div>
@@ -98,15 +118,18 @@ export default class Main extends Component {
                         ? <h1>Searching...</h1> 
                         : <Results repos={this.state.repos} 
                         addFavourites={this.addFavourites} 
+                        removeFavourites={this.removeFavourites} 
                         favTracker={this.state.favTracker}/>
                     }
                 </div>
                 <div className="col-md favArea">
-                    <Favourites favourites={this.state.favourites}/>
+                    <Favourites favourites={this.state.favourites} 
+                                addFavourites={this.addFavourites} 
+                                removeFavourites={this.removeFavourites} 
+                                favTracker={this.state.favTracker}/>
                 </div>
             </div>
           </div>
         );
       }
-
 }

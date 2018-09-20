@@ -14,48 +14,51 @@ h1 {
  position: relative;
 }
 
-.mainArea {
+input {
+  width: 100%;
   height: 100%;
+  border-radius: 3px;
+  border: black solid 1px;
+  padding-left: 15px;
+}
+
+.btn.searchButton {
+  background-color: #7D22F9;
+  color: white;
+  width: 100%;
+  font-weight: bold;
+}
+
+.row.mainArea, form.row {
+  margin-right: 0;
+  margin-left: 0;
+}
+
+.mainArea {
+  height: 100vh;
 }
 
 .searchArea {
-  height: 100%;
-  padding-top: 25px;
+  margin: 25px 20px 0 20px;
 }
 
-.favArea {
-  padding-top: 25px;
-}
-
-.searchForm {
-  margin: 0 auto 0 auto;
-  width: 80%;
-}
-
-input {
-  width: 60%;
-}
-
-.searchButton {
-  background-color: #7D22F9;
-  color: white;
-  margin-left: 10px;
+.repo-container {
+  margin-top: 50px;
 }
 
 .favArea {
   background-color: #F4EBFF;
+  padding-top: 25px;
+  height: 100%;
 }
 
-table {
-  margin: 0 20px 0 20px;
-}
-
-.tbLong {
-  width: 200px;
+.heading {
+  font-weight: bold;
   padding-bottom: 10px;
 }
 
 .add {
   color:#7D22F9;
   text-decoration: underline;
+  text-align: right;
 }

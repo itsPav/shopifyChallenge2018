@@ -24,14 +24,18 @@ export default class SearchForm extends Component {
 
     render() {
         return (
-            <form className="searchForm" onSubmit={this.handleSubmit} >
-                <div className="input-group mb-3 formArea">
-                    <input 
-                        onChange={this.onSearchChange}
-                        ref={ input => this.query = input}
-                        placeholder="Search" 
-                    />
-                    <Button type="submit" className="searchButton">Search</Button>
+            <form onSubmit={this.handleSubmit} >
+                <div className="row">
+                    <div className="col-sm-8">
+                        <input
+                            onChange={this.onSearchChange}
+                            ref={ input => this.query = input}
+                            placeholder="Search" 
+                        />
+                    </div>
+                    <div className="col-sm-4">
+                        <Button type="submit" className="searchButton">Search</Button>
+                    </div>
                 </div>
             </form>
         );

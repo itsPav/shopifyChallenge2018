@@ -1,39 +1,60 @@
-import React from 'react';
+import React, { Component } from 'react';
 import Repo from './Repo';
 
-const Results = props => {
-    const results = props.repos;
-    var added = false;
-    const favTracker = props.favTracker;
+export default class Results extends Component {
 
-    let rows = results.map((repo) => 
-        { 
-            if(favTracker.indexOf(repo.node.url) !== -1) {
-                added = true;
-            } else {
-                added = false;
-            }
-            return <Repo key={repo.node.url} data={repo} addFavourites={props.addFavourites} added={added}/>
+    constructor(props) {
+        super(props);
+        this.componentWillReceiveProps = this.componentWillReceiveProps.bind(this);
+
+        this.state = {
+            results: [],
+            favTracker: [],
+            added: false,
+            favourite: false
         }
-    )
+    }
 
-    return(
-        <div className="repo-container">
-            <table className="repo-list">
-                <thead>
-                    <tr>
-                        <th>Name</th>
-                        <th>Language</th>
-                        <th>Latest Tag</th>
-                        <th></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {rows}
-                </tbody>
-            </table>
-        </div>
-    );
+    componentWillReceiveProps({repos, favTracker}) {
+        this.setState({
+            results: repos,
+            favTracker: favTracker
+        })
+    }
+    
+    render() {
+        let rows = this.state.results.map((repo) => 
+            { 
+                return <Repo key={repo.node.url} 
+                                data={repo} 
+                                addFavourites={this.props.addFavourites} 
+                                removeFavourites={this.props.removeFavourites}
+                                added={this.state.favTracker.indexOf(repo.node.url) !== -1 
+                                        ? 
+                                        true
+                                        : 
+                                        false
+                                }
+                                favourite={this.state.favTracker.indexOf(repo.node.url) !== -1 
+                                    ? 
+                                    false
+                                    : 
+                                    false
+                            }
+                        />
+            }
+        )
+
+        return(
+            <div className="repo-container">
+                <div className="row heading">
+                    <div className="col-sm-4">Name</div>
+                    <div className="col-sm-3">Language</div>
+                    <div className="col-sm-3">Latest Tag</div>
+                    <div className="col-sm-2"></div>
+                </div>
+                {rows}
+            </div>
+        );
+    }
 };
-
-export default Results;
